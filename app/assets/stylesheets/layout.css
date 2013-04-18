@@ -1,0 +1,108 @@
+ body {
+   padding-left: 0;
+   padding-right: 0;
+   /* No content under the fixed bootstrap header. */
+   padding-top: 60px;
+   color: #333333;
+ }
+
+
+
+ /* HEADER STUFF */
+
+ .navbar {
+   height: 60px;
+ }
+ .navbar .navbar-inner {
+   background: rgba(255, 255, 255, 0.960784);
+   border: none;
+   height: 60px;
+   padding-left: 20px;
+   padding-right: 20px;
+ }
+ .navbar .navbar-inner .image {
+   border-radius: 0px;
+   margin: 16px 0px 0px 0px;
+   -moz-box-shadow: none;
+   -webkit-box-shadow: none;
+   -o-box-shadow: none;
+   box-shadow: none;
+   height: 30px;
+   width: 30px;
+ }
+ .navbar .navbar-inner .brand {
+   margin: 0px 0px 0px -15px;
+   font-weight: bold;
+   font-size: 28px;
+   color: #333333;
+   line-height: 30px;
+   letter-spacing: -1px;
+   text-decoration: none;
+ }
+ .navbar .navbar-inner .nav li a {
+   line-height: 30px;
+ }
+
+ a.login-button .caret {
+   margin: 15px 5px;
+   -webkit-transition: 0.25s;
+   -moz-transition: 0.25s;
+   -o-transition: 0.25s;
+   transition: 0.25s;
+ }
+
+ a.login-button:hover .caret {
+   border-top-color: #1abc9c;
+   -webkit-transition: 0.25s;
+   -moz-transition: 0.25s;
+   -o-transition: 0.25s;
+   transition: 0.25s;
+ }
+
+ .login-button-li {
+   position: relative;
+ }
+
+ .login-button-li .dropdown {
+   display: none;
+ }
+ .login-button-li.show-dropdown .dropdown {
+   display: block;
+   position: absolute;
+   right: -20px;
+   top: 70px;
+   background: rgba(0,0,0, 0.6);
+   padding: 20px;
+   border-radius: 5px;
+ }
+ .login-button-li.show-dropdown .login-button .caret {
+   border-top-color: #1abc9c;
+ }
+ .login-button-li.show-dropdown .login-button {
+   color: #1abc9c;
+ }
+
+
+
+/* FOOTER STUFF */
+
+ .container-fluid.footer {
+   background: #333333;
+   padding: 30px 20px 30px 20px;
+ }
+ .footer .container .row-fluid .span12 .pull-left p {
+   font-weight: 300;
+   color: #ffffff;
+   line-height: 36px;
+ }
+ .footer .container .row-fluid .span12 .nav {
+   margin: 0px;
+ }
+ .footer .container .row-fluid .span12 .nav li a {
+   text-align: center;
+   color: #cccccc;
+   text-decoration: none;
+ }
+.footer .container .row-fluid .span12 .nav li a:hover {
+   color: #333333;
+ }

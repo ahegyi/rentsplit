@@ -1,18 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
   <title>Rentsplit</title>
+  
+
+  <link href="<%= request.protocol %>fonts.googleapis.com/css?family=Raleway|Lato" media="screen" rel="stylesheet" type="text/css">
+  <link href="<%= request.protocol %>netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
 
-  <!-- Needed for Devise -->
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <%= render "common/header" %>
 
-  <%= yield %>
+  <% # Needed for Devise %>
+  <% unless notice.blank? %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+  <% unless alert.blank? %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
 
+  <!-- <div class="container-fluid">
+    <div class="container">
+      <div class="row-fluid">
+        <span class="span12"> -->
+
+          <%= yield %>
+
+        <!-- </span>
+      </div>
+    </div>
+  </div> -->
+
+
+  <%= render "common/footer" %>
+
+  <% # Need to load these after elements load, to manipulate them %>
+  <script src="<%= request.protocol %>netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    $('.login-button').click(function(e) {
+      $('.login-button-li').toggleClass('show-dropdown');
+      // console.log(e);
+      // e.stopPropagation();
+    });
+    /* $('body').click(function(e){
+      if (e.toElement.localName === 'input') {
+        return;
+      } else {
+        $('.login-button-li').removeClass('show-dropdown');  
+        console.log(e)
+      }
+    }) */
+  </script>
 </body>
+
 </html>
