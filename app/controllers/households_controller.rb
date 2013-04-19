@@ -8,14 +8,13 @@ class HouseholdsController < ApplicationController
   
   # GET /households/new
   def new
-    
-
+    @household = Household.new
   end
 
   # POST /households
   def create
     household = Household.new
-    household.name = params[:name]
+    household.name = params[:household][:name]
     household.save!
 
     # Since we are creating a new household, we must create a new HouseholdMember
@@ -26,17 +25,18 @@ class HouseholdsController < ApplicationController
     household_member.household = household
     household_member.save!
 
-    redirect_to user_root, :notice => "Household created!"
+    redirect_to user_root_path, :notice => "Household created!"
   end
 
   # GET /households/edit/:id
   def edit
-
+    @household = Household.find(params[:id])
   end
 
   # PUT /households
   def update
 
+    redirect_to user_root_path, :notice => "Household updated!"
   end
 
 end

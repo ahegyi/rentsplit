@@ -1,8 +1,10 @@
 <% if @households.nil? || @households.empty? %>
   <p>No households set up yet. <%= link_to "Create one now!", households_new_path %></p>
 <% else %>
+  <h2>My Households</h2>
   <% @households.each do |h| %>
-    <p>Household: <%= h.inspect %></p>
+    <strong><%= h.name %></strong> (<%= link_to "add and remove members", households_edit_path(h.id) %>)
+    <p><%= h.household_members.map{|m| m.user.first_name + " " + m.user.last_name}.join(", ") %></p>
   <% end %>
 <% end %>
 

@@ -1,0 +1,10 @@
+<%= form_for @household, :url => { :action => "create" } do |f| %>
+  <fieldset>
+    <legend>Create New Household</legend>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <div><%= f.submit "Create", :class => "btn btn-primary" %></div>
+  </fieldset>
+<% end %>
+
+<%= link_to "Back to my households", households_path %>
