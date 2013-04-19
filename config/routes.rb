@@ -1,7 +1,14 @@
 Rentsplit::Application.routes.draw do
+  root :to => 'pages#home'
+
   devise_for :users
 
-  get "/", :to => "pages#home", :as => "user_root"
+  # HOUSEHOLDS
+  get "/households", :to => "households#home", :as => "user_root"
+  get "/households/new", :to => "households#new", :as => "households_new"
+  post "/households", :to => "households#create", :as => "households_create"
+  get "/households/edit", :to => "households#edit", :as => "households_edit"
+  put "/households", :to => "households#update", :as => "households_update"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -52,7 +59,6 @@ Rentsplit::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'pages#home'
 
   # See how all your routes lay out with "rake routes"
 

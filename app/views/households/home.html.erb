@@ -1,0 +1,9 @@
+<% if @households.nil? || @households.empty? %>
+  <p>No households set up yet. <%= link_to "Create one now!", households_new_path %></p>
+<% else %>
+  <% @households.each do |h| %>
+    <p>Household: <%= h.inspect %></p>
+  <% end %>
+<% end %>
+
+<%= link_to "Create new household", households_new_path %>
