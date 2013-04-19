@@ -25,12 +25,27 @@ class HouseholdsController < ApplicationController
     household_member.household = household
     household_member.save!
 
-    redirect_to user_root_path, :notice => "Household created!"
+    redirect_to user_root_url, :notice => "Household created!"
   end
 
   # GET /households/:id/edit
   def edit
     @household = Household.find(params[:id])
+  end
+
+  # DELETE /households/:id
+  def destroy
+    @household = Household.find(params[:id])
+    @household.destroy
+
+    redirect_to households_url
+  end
+
+  # GET /households/:id/edit_members
+  def edit_members
+    @household = Household.find(params[:id])
+
+
   end
 
   # PUT /households/:id

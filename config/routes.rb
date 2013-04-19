@@ -13,6 +13,14 @@ Rentsplit::Application.routes.draw do
   put "/households/:id", :to => "households#update", :as => "households_update"
   delete "/households/:id", :to => "households#destroy"
 
+  # HOUSEHOLDS AND THEIR MEMBERS
+  # show form for editing household members (add, edit, update, remove)
+  get "/households/:id/members/edit", :to => "households#edit_members", :as => "edit_household_members"
+  # add new household members
+  post "/households/:id/members", :to => "households#create_members", :as => "household_members_create"
+  # update and remove household members
+  put "/households/:household_id/members", :to => "households#update_members", :as => "household_members_update"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

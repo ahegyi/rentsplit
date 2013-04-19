@@ -1,11 +1,13 @@
+<h2>My Households</h2>
+
 <% if @households.nil? || @households.empty? %>
   <p>No households set up yet. <%= link_to "Create one now!", new_household_path %></p>
 <% else %>
-  <h2>My Households</h2>
   <% @households.each do |h| %>
     <strong><%= h.name %></strong> (<%= link_to "edit name", edit_household_path(h.id) %>)
-    <p><%= h.household_members.map{|m| m.user.first_name + " " + m.user.last_name}.join(", ") %></p>
+    <p><%= h.household_members.map{|m| m.user.first_name + " " + m.user.last_name}.join(", ") %><br>
+    <small><%= link_to "Delete #{h.name}", h, method: :delete, data: { confirm: "Are you sure? There is NO going back!" } %></small></p>
   <% end %>
 <% end %>
 
-<%= link_to "Create new household", new_household_path %>
+<%= link_to "Create new household", new_household_path, :class => "btn btn-primary" %>
