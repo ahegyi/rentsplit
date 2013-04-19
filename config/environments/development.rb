@@ -13,8 +13,20 @@ Rentsplit::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  # We DO care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    :address        => "smtp.mandrillapp.com",
+    :port           => 587,
+    :domain         => "rentsplit-dev.com",
+    :user_name      => ENV["MANDRILL_USER_NAME"],
+    :password       => ENV["MANDRILL_API_SECRET"],
+    :authentication => "plain",
+    :enable_starttls_auto => true
+  }
 
   # Devise says:
   # Ensure you have defined default url options in your environments files. Here 
