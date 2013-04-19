@@ -6,10 +6,12 @@ Rentsplit::Application.routes.draw do
   # HOUSEHOLDS
   get "/households", :to => "households#home", :as => "user_root"
   get "/households", :to => "households#home", :as => "households"
-  get "/households/new", :to => "households#new", :as => "households_new"
+  get "/households/new", :to => "households#new", :as => "new_household"
   post "/households", :to => "households#create", :as => "households_create"
-  get "/households/edit/:id", :to => "households#edit", :as => "households_edit"
-  put "/households", :to => "households#update", :as => "households_update"
+  get "/households/:id", :to => "households#show", :as => "household"
+  get "/households/:id/edit", :to => "households#edit", :as => "edit_household"
+  put "/households/:id", :to => "households#update", :as => "households_update"
+  delete "/households/:id", :to => "households#destroy"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

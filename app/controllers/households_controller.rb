@@ -28,15 +28,21 @@ class HouseholdsController < ApplicationController
     redirect_to user_root_path, :notice => "Household created!"
   end
 
-  # GET /households/edit/:id
+  # GET /households/:id/edit
   def edit
     @household = Household.find(params[:id])
   end
 
-  # PUT /households
+  # PUT /households/:id
   def update
+    @household = Household.find(params[:id])
 
-    redirect_to user_root_path, :notice => "Household updated!"
+    if @household.update_attributes(params[:household])
+      redirect_to user_root_path, notice: "Household updated!"
+    else
+      render action: "edit"
+    end
+
   end
 
 end
