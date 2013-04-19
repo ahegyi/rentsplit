@@ -5,7 +5,16 @@
    padding-top: 60px;
    color: #333333;
  }
+@media screen and (max-width: 979px) {
+   /* No padding needed now */
+   body {
+      padding-top: 0;
+   }
+}
 
+ .alert a.close {
+   text-decoration: none;
+ }
 
 
  /* HEADER STUFF */
@@ -41,6 +50,15 @@
  }
  .navbar .navbar-inner .nav li a {
    line-height: 30px;
+ }
+ 
+ .navbar .navbar-inner .nav li.header-welcome-message {
+   padding: 14px 15px 17px;
+   margin: 2px 2px 2px 0;
+   line-height: 30px;
+   color: #777777;
+   text-shadow: 0 1px 0 #ffffff;
+   font-weight: bold;
  }
 
  a.login-button .caret {
@@ -81,7 +99,6 @@
  .login-button-li.show-dropdown .login-button {
    color: #1abc9c;
  }
-
 
 
 /* FOOTER STUFF */

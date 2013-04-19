@@ -1,6 +1,8 @@
 Rentsplit::Application.routes.draw do
   devise_for :users
 
+  get "/", :to => "pages#home", :as => "user_root"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

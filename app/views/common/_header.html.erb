@@ -8,22 +8,48 @@
       <%= link_to "Rentsplit", "/", :class => "brand" %>
       
         <ul class="nav nav-pills pull-right" role="menu">
-          <li>
-            <%= link_to "Sign Up", new_user_registration_path %>
-          </li>
-          <li class="login-button-li">
-            <a class="login-button" href="#">
-              Login
-              <b class="caret"></b>
-            </a>
-            <div class="dropdown">
-              <form>
-                <input type="email" placeholder="E-mail">
-                <input type="password" placeholder="Password">
-                <button type="submit" class="btn btn-primary pull-right">Login</button>
-              </form>
-            </div>
-          </li>
+          <% if user_signed_in? %>
+            <li class="header-welcome-message">
+              Hey there <%= current_user.first_name %>!
+            </li>
+            <li> 
+              <%= link_to "Edit Account", edit_user_registration_path %>
+            </li>
+            <li> 
+              <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+            </li>
+
+          <% else %>
+            <li>
+              <%= link_to "Sign Up", new_user_registration_path %>
+            </li>
+            <li class="login-button-li">
+              <a class="login-button" href="#">
+                Login
+                <b class="caret"></b>
+              </a>
+              <div class="dropdown">
+                
+                <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+                
+                  <%= f.email_field :email, :placeholder => "E-mail" %>
+                  <%= f.password_field :password, :placeholder => "Password" %>
+
+                  <% if devise_mapping.rememberable? -%>
+                  
+                    <%= f.label :remember_me do %>
+                      <%= f.check_box :remember_me %>
+                      <p class="fake-checkbox-label" style="color: white;">Remember Me</p>
+                    <% end %>
+
+                  <% end -%>
+
+                  <%= f.submit "Login", :class => "btn btn-primary pull-right" %>
+                <% end %>
+
+              </div>
+            </li>
+          <% end %>
 
         </ul>
 

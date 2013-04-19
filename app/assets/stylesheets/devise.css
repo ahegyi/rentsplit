@@ -1,0 +1,14 @@
+.devise-links a {
+  display: block;
+  margin: 5px 0;
+}
+
+.fake-checkbox-label {
+  display: inline-block;
+  margin: 5px;
+}
+
+/* override Bootstrap's margins */
+input[type="checkbox"] {
+  margin: 0;
+}

@@ -1,0 +1,10 @@
+<% unless notice.blank? %>
+  <p class="alert notice"><%= notice %>
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+  </p>
+<% end %>
+<% unless alert.blank? %>
+  <p class="alert alert-error"><%= alert %>
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+  </p>
+<% end %>

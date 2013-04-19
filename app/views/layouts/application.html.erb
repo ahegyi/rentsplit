@@ -20,12 +20,7 @@
   <%= render "common/header" %>
 
   <% # Needed for Devise %>
-  <% unless notice.blank? %>
-    <p class="notice"><%= notice %></p>
-  <% end %>
-  <% unless alert.blank? %>
-    <p class="alert"><%= alert %></p>
-  <% end %>
+  <%= render "common/notices" %>
 
   <div class="container-fluid">
     <div class="container">
@@ -33,6 +28,15 @@
         <span class="span12">
 
           <%= yield %>
+
+        </span>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row-fluid">
+        <span class="span12">
+
+          <!-- Just a little space. -->
 
         </span>
       </div>
@@ -50,6 +54,7 @@
       // console.log(e);
       // e.stopPropagation();
     });
+    $('#error_explanation').addClass('alert alert-error');
     /* $('body').click(function(e){
       if (e.toElement.localName === 'input') {
         return;
