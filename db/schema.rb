@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419014328) do
+ActiveRecord::Schema.define(:version => 20130419014536) do
+
+  create_table "household_members", :force => true do |t|
+    t.date     "last_entered_on"
+    t.date     "last_exited_on"
+    t.boolean  "active",          :default => true
+    t.boolean  "manager",         :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
 
   create_table "households", :force => true do |t|
     t.string   "name"

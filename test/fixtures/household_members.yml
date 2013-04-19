@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  last_entered_on: 2013-04-18
+  last_exited_on: 2013-04-18
+  active: false
+  manager: false
+
+two:
+  last_entered_on: 2013-04-18
+  last_exited_on: 2013-04-18
+  active: false
+  manager: false
