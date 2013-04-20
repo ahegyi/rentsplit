@@ -7,8 +7,10 @@
     &nbsp;(<%= link_to member.user.email, "mailto:#{member.user.email}", :target => "_blank" %>)
     &nbsp;|&nbsp;&nbsp;
     Since <%= ordinalize_date(member.last_entered_on) %>
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-    <%= link_to "Remove", household_members_update_path(@household.id, member.id, "remove"), :method => :put %>
+    <% if current_user.is_manager_of?(@household) %>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      <%= link_to "Remove", household_members_update_path(@household.id, member.id, "remove"), :method => :put %>
+    <% end %>
   </li>
 <% end %>
 </ul>
@@ -31,6 +33,8 @@
   </ul>
 <% end %>
 
-<%= link_to "Add new member", new_household_member_path(@household.id), :class => "btn btn-primary" %>
+<% if current_user.is_manager_of?(@household) %>
+  <%= link_to "Add new member", new_household_member_path(@household.id), :class => "btn btn-primary" %>
+<% end %>
 
 <h3><%= link_to "Back to my households", households_path %></h3>

@@ -12,13 +12,15 @@
         <%= h.active_members.map{|m| m.user.name}.join(", ") %>
       <% end %>
     </p>
-    <p>
-      <%= link_to "Edit Name", edit_household_path(h.id) %>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <%= link_to "Edit Members", household_members_path(h.id) %>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <small><%= link_to "Delete #{h.name}", h, method: :delete, data: { confirm: "Are you sure? There is NO going back!" } %></small>
-    </p>
+    <% if current_user.is_manager_of?(h) %>
+      <p>
+        <%= link_to "Edit Name", edit_household_path(h.id) %>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <%= link_to "Edit Members", household_members_path(h.id) %>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <small><%= link_to "Delete #{h.name}", h, method: :delete, data: { confirm: "Are you sure? There is NO going back!" } %></small>
+      </p>
+    <% end %>
   <% end %>
 <% end %>
 
