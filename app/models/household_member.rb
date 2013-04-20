@@ -3,4 +3,11 @@ class HouseholdMember < ActiveRecord::Base
 
   belongs_to :household
   belongs_to :user
+
+  def active?
+    active
+  end  
+
+  #  alias_method :active?, :active # This shit is weird, will alias to the active class variable
+
 end

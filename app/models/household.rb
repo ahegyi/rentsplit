@@ -3,4 +3,15 @@ class Household < ActiveRecord::Base
 
   has_many :household_members #, :bills
   has_many :users, :through => :household_members
+
+  def active_members
+    #  self.select{ |household_member| household_member.active }
+    #  self.household_members.select(&:active) # Symbol to Proc, like above
+    self.household_members.where(:active => true) # fastest, not throwing away anything
+  end
+
+  def inactive_members
+    self.household_members.where(:active => false)
+  end
+
 end

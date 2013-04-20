@@ -13,4 +13,20 @@ class User < ActiveRecord::Base
   has_many :household_members #, :bill_parts
   has_many :households, :through => :household_members
 
+
+  def name
+    self.first_name + " " + self.last_name
+  end
+
+  def is_manager_of?(household)
+    household_members = household.household_members
+    current_user_as_household_member = household_members.detect {|h_member| h_member.user_id == self.id }
+
+    unless current_user_as_household_member.nil?
+      current_user_as_household_member.manager
+    else
+      nil
+    end
+  end
+
 end

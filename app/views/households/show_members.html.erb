@@ -1,0 +1,36 @@
+<h2><%= @household.name %></h2>
+
+<ul class="household-members">
+<% @active_members.each do |member| %>
+  <li>
+    <%= member.user.name %>
+    &nbsp;(<%= link_to member.user.email, "mailto:#{member.user.email}", :target => "_blank" %>)
+    &nbsp;|&nbsp;&nbsp;
+    Since <%= ordinalize_date(member.last_entered_on) %>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <%= link_to "Remove", household_members_update_path(@household.id, member.id, "remove"), :method => :put %>
+  </li>
+<% end %>
+</ul>
+
+<% if current_user.is_manager_of?(@household) && !@inactive_members.empty? %>
+  <h3>Inactive Members</h3>
+  <ul class="household-members">
+    <% @inactive_members.each do |member| %>
+      <li>
+        <%= member.user.name %>
+        &nbsp;(<%= link_to member.user.email, "mailto:#{member.user.email}", :target => "_blank" %>)
+        &nbsp;|&nbsp;&nbsp;
+        Last here from <%= ordinalize_date(member.last_entered_on) %> to <%= ordinalize_date(member.last_exited_on) %>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <%= link_to "Reactivate", household_members_update_path(@household.id, member.id, "reactivate"), :method => :put %>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <%= link_to "Delete", destroy_household_member_path(@household.id, member.id), :method => :delete, data: { confirm: "Are you sure? There is NO going back!" } %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to "Add new member", new_household_member_path(@household.id), :class => "btn btn-primary" %>
+
+<h3><%= link_to "Back to my households", households_path %></h3>

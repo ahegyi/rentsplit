@@ -3,23 +3,33 @@ Rentsplit::Application.routes.draw do
 
   devise_for :users
 
+  
+
   # HOUSEHOLDS
-  get "/households", :to => "households#home", :as => "user_root"
-  get "/households", :to => "households#home", :as => "households"
-  get "/households/new", :to => "households#new", :as => "new_household"
-  post "/households", :to => "households#create", :as => "households_create"
-  get "/households/:id", :to => "households#show", :as => "household"
-  get "/households/:id/edit", :to => "households#edit", :as => "edit_household"
-  put "/households/:id", :to => "households#update", :as => "households_update"
-  delete "/households/:id", :to => "households#destroy"
+  # get "/households", :to => "households#home", :as => "user_root"
+  # get "/households", :to => "households#home", :as => "households"
+  # get "/households/new", :to => "households#new", :as => "new_household"
+  # post "/households", :to => "households#create", :as => "households_create"
+  # get "/households/:id", :to => "households#show", :as => "household"
+  # get "/households/:id/edit", :to => "households#edit", :as => "edit_household"
+  # put "/households/:id", :to => "households#update", :as => "households_update"
+  # delete "/households/:id", :to => "households#destroy"
+
+  resources :households
+  get "/households", :to => "households#index", :as => "user_root"
 
   # HOUSEHOLDS AND THEIR MEMBERS
-  # show form for editing household members (add, edit, update, remove)
-  get "/households/:id/members/edit", :to => "households#edit_members", :as => "edit_household_members"
+  # show household members (add, edit, update, remove)
+  get "/households/:id/members", :to => "households#show_members", :as => "household_members"
+  get "/households/:id/members/new", :to => "households#new_member", :as => "new_household_member"
+
   # add new household members
   post "/households/:id/members", :to => "households#create_members", :as => "household_members_create"
   # update and remove household members
-  put "/households/:household_id/members", :to => "households#update_members", :as => "household_members_update"
+  put "/households/:household_id/members/:household_member_id/:update_action", :to => "households#update_members", :as => "household_members_update"
+  # delete household members permananently
+  delete "/households/:household_id/members/:household_member_id", :to => "households#destroy_household_member", :as => "destroy_household_member"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

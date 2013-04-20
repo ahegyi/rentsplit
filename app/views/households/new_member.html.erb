@@ -1,0 +1,11 @@
+<h2>Add new member to <%= @household.name %></h2>
+
+<p><strong>Notice:</strong> You must tell this person to sign up for Rentsplit before you can add them as a household member.</p>
+
+<%= form_tag household_members_create_path(@household.id), :method => "post" do %>
+  <%= label_tag :email, "E-mail" %>
+  <%= text_field_tag :email, nil, :type => "email" %>
+  <div>
+    <%= submit_tag "Add to #{@household.name}", :class => "btn btn-primary" %>
+  </div>
+<% end %>
