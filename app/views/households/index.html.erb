@@ -1,5 +1,3 @@
-<h2>My Households</h2>
-
 <% if @households.nil? || @households.empty? %>
   <p>No households set up yet. <%= link_to "Create one now!", new_household_path %></p>
 <% else %>
@@ -24,4 +22,4 @@
   <% end %>
 <% end %>
 
-<%= link_to "Create new household", new_household_path, :class => "btn btn-primary" %>
+<%= link_to "Create new household", new_household_path, :class => "btn btn-primary top-space" %>

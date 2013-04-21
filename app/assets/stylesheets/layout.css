@@ -16,6 +16,10 @@
    text-decoration: none;
  }
 
+ .top-space {
+   margin-top: 20px; 
+ }
+
 
  /* HEADER STUFF */
 
@@ -99,6 +103,32 @@
  .login-button-li.show-dropdown .login-button {
    color: #1abc9c;
  }
+
+
+
+/* APP NAVIGATION */
+
+.app-navigation {
+   border-bottom: 1px solid #2C3E50;
+}
+
+.app-navigation li.active a, .app-navigation li.active a:hover {
+   background: #34495E;
+}
+
+.app-navigation a {
+   text-decoration: none;
+   color: #2C3E50;
+}
+
+.app-breadcrumb li.active, .app-breadcrumb a:hover {
+   color: #2C3E50;
+}
+
+.app-breadcrumb li a {
+   color: #2980B9;
+}
+
 
 
 /* FOOTER STUFF */

@@ -1,0 +1,46 @@
+<ul class="app-navigation nav nav-pills">
+  <li class=<%= request.path == "/households" ? "active" : "" %>>
+    <%= link_to "Households", households_path %>
+  </li> 
+
+  <% current_user.households.each do |household| %>
+    <li class=<%= request.path.start_with?("/households/") && @current_household_id == household.id ? "active" : "" %>>
+    <%= link_to household.name, household_members_path(household.id) %>
+    </li>
+  <% end %>
+
+</ul>
+
+<% if request.path.start_with?("/households/") && !request.path.end_with?("/new") && !request.path.end_with?("/edit") %>
+  <ul class="app-navigation nav nav-pills">
+
+    <li class=<%= request.path.end_with?("/members") ? "active" : "" %>>
+      <%= link_to "Members", household_members_path(@current_household_id) %>
+    </li>
+
+    <li class=<%= request.path.end_with?("/households") ? "active" : "" %>>
+      <%= link_to "Bills", "#" %>
+    </li> 
+
+  </ul>
+<% end %>
+
+<!-- 
+<ul class="app-breadcrumb breadcrumb">
+  <li>
+    <% # Hacky way of getting current count of households. Should
+        # probably put this in the User model.
+        %> 
+    <% if current_user.households.count > 1 %>
+      <%= link_to "Households", households_path %>
+    <% elsif current_user.households.count == 1 %>
+      <%= link_to "#{current_user.households.first.name}", households_path %>
+    <% end %>
+    <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="#">Bills</a>
+    <span class="divider">/</span>
+  </li>
+  <li class="active">Payments</li>
+</ul> -->
