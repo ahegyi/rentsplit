@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  amount: 1
+  description: MyString
+  provider: MyString
+  private: false
+  billed_on: 2013-04-20
+  due_on: 2013-04-20
+  period_started_on: 2013-04-20
+  period_ended_on: 2013-04-20
+  household_id: 1
+
+two:
+  amount: 1
+  description: MyString
+  provider: MyString
+  private: false
+  billed_on: 2013-04-20
+  due_on: 2013-04-20
+  period_started_on: 2013-04-20
+  period_ended_on: 2013-04-20
+  household_id: 1

@@ -4,6 +4,8 @@ class HouseholdMember < ActiveRecord::Base
   belongs_to :household
   belongs_to :user
 
+  has_many :bills_paid, :class_name => "Bill", :foreign_key => "paid_by_id"
+  
   def active?
     active
   end  

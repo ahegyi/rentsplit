@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419232815) do
+ActiveRecord::Schema.define(:version => 20130421041755) do
+
+  create_table "bills", :force => true do |t|
+    t.integer  "amount"
+    t.string   "description"
+    t.string   "provider"
+    t.boolean  "private",           :default => false
+    t.date     "billed_on"
+    t.date     "due_on"
+    t.date     "period_started_on"
+    t.date     "period_ended_on"
+    t.integer  "household_id"
+    t.integer  "paid_by_id"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
 
   create_table "household_members", :force => true do |t|
     t.date     "last_entered_on"
