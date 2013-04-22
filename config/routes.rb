@@ -2,7 +2,8 @@ Rentsplit::Application.routes.draw do
   root :to => 'pages#home'
   get "/privacy", :to => "pages#privacy", :as => "pages_privacy"
   get "/terms", :to => "pages#terms", :as => "pages_terms"
-
+  get "/about", :to => "pages#about", :as => "pages_about"
+  
   devise_for :users
 
   # HOUSEHOLDS
