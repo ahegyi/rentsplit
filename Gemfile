@@ -7,9 +7,14 @@ gem 'rails', '3.2.13'
 
 gem 'devise'
 
-gem 'sqlite3'
+group :development do
+  gem 'sqlite3'
+  gem 'zeus'
+end
 
-gem 'zeus'
+group :production do
+  gem 'pg'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.

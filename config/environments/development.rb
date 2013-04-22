@@ -21,7 +21,7 @@ Rentsplit::Application.configure do
   config.action_mailer.smtp_settings = {
     :address        => "smtp.mandrillapp.com",
     :port           => 587,
-    :domain         => "rentsplit-dev.com",
+    :domain         => "rentsplit.co",
     :user_name      => ENV["MANDRILL_USER_NAME"],
     :password       => ENV["MANDRILL_API_SECRET"],
     :authentication => "plain",

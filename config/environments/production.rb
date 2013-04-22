@@ -20,6 +20,33 @@ Rentsplit::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+
+
+  # We don't care if the mailer can't send in production (I'm guessing here)
+  # config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    :address        => "smtp.mandrillapp.com",
+    :port           => 587,
+    :domain         => "rentsplit.co",
+    :user_name      => ENV["MANDRILL_USER_NAME"],
+    :password       => ENV["MANDRILL_API_SECRET"],
+    :authentication => "plain",
+    :enable_starttls_auto => true
+  }
+
+  # Devise says:
+  # Ensure you have defined default url options in your environments files. Here 
+  #    is an example of default_url_options appropriate for a development environment 
+  #    in config/environments/development.rb:
+
+  # In production, :host should be set to the actual host of your application.
+
+  config.action_mailer.default_url_options = { :host => 'rentsplit.co' }
+
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
