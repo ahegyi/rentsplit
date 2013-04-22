@@ -5,6 +5,10 @@ class HouseholdMember < ActiveRecord::Base
   belongs_to :user
 
   has_many :bills_paid, :class_name => "Bill", :foreign_key => "paid_by_id"
+  has_many :bill_parts_owed, :class_name => "BillPart", :foreign_key => "owed_by_id"
+  
+  has_many :payments_received, :class_name => "Payment", :foreign_key => "paid_to_id"
+  has_many :payments_sent, :class_name => "Payment", :foreign_key => "paid_from_id"
   
   def active?
     active
