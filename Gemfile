@@ -10,6 +10,7 @@ gem 'devise'
 group :development do
   gem 'sqlite3'
   gem 'zeus'
+  gem 'rails-erd'
 end
 
 group :production do
