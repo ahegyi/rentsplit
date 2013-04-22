@@ -1,0 +1,36 @@
+
+<p class="top-space">
+What do you owe? Check here for the latest in <%= @current_household.name %>. 
+</p>
+
+<% @payments_to_pay.each do |payment| %>
+<p class="top-space">
+  <% if current_user.household_member_id_of(@current_household) == payment.paid_from_id %>
+    You owe
+  <% else %>
+    <%= payment.paid_from.user.first_name %> owes
+  <% end %>
+  <%= payment.paid_to.user.first_name %>
+  <strong><%= integer_to_currency(payment.amount) %></strong>
+  <% if current_user.household_member_id_of(@current_household) == payment.paid_from_id %>
+    &nbsp;<%= link_to "Pay", build_venmo_link(payment.paid_to, payment.amount), :class => "btn btn-primary btn-mini", :target => "_blank" %>
+  <% end %>
+</p>
+
+<% end %>
+
+<!--
+<% @household_members.each do |member| %>
+<p>
+  <% if current_user.id == member.user.id %>
+    You<%= member.net_owed_to_household > 0 ? " are owed " : " owe " %>
+  <% else %>
+    <%= member.user.first_name %>
+    <%= member.net_owed_to_household > 0 ? " is owed " : " owes " %>
+  <% end %>
+  <strong><%= integer_to_currency(member.net_owed_to_household.abs) %></strong>
+</p>
+<% end %>
+
+<%= button_to "Calculate Payments", calculate_payments_path, :class => "btn btn-primary top-space" %>
+-->

@@ -72,6 +72,9 @@ class BillsController < ApplicationController
     
     # Sanity check
     if @bill.paid_by_user?(current_user)
+      @bill.bill_parts.each do |bill_part|
+        bill_part.destroy
+      end
       @bill.destroy
       redirect_to household_bills_url(params[:household_id]), :notice => "Bill for #{@bill.provider} has been permanently deleted."
     else

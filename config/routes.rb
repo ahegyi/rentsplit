@@ -17,7 +17,10 @@ Rentsplit::Application.routes.draw do
 
   resources :households do
     resources :bills
+    resources :payments
   end
+
+  post "/households/:household_id/calculate_payments", :to => "payments#calculate_payments", :as => "calculate_payments"
 
   get "/households", :to => "households#index", :as => "user_root"
 

@@ -13,8 +13,24 @@ class HouseholdMember < ActiveRecord::Base
   def active?
     active
   end  
-
   #  alias_method :active?, :active # This shit is weird, will alias to the active class variable
 
-  
+  def amount_paid_to_household
+    amount = self.bills_paid.map{|bill| bill.amount}.reduce(:+)
+    return amount || 0 # no nils!
+  end
+
+  def amount_owed_to_household
+    amount = self.bill_parts_owed.map{|bill_part| bill_part.amount}.reduce(:+)
+    return amount || 0 # no nils!
+  end
+
+  def net_owed_to_household
+    self.amount_paid_to_household - self.amount_owed_to_household
+  end
+
+
+
+
+
 end

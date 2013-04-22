@@ -34,5 +34,5 @@
 <% end %>
 
 <% if current_user.is_manager_of?(@household) %>
-  <%= link_to "Add new member", new_household_member_path(@household.id), :class => "btn btn-primary" %>
+  <%= link_to "Add new member", new_household_member_path(@household.id), :class => "btn btn-primary top-space" %>
 <% end %>

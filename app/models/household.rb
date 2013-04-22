@@ -19,9 +19,16 @@ class Household < ActiveRecord::Base
     self.household_members.where(:manager => true)
   end
 
-  def calculate_payments
-    # add up 
-    
+  def bill_parts
+    all_bill_parts = []
+    self.bills.each do |bill|
+      all_bill_parts += bill.bill_parts
+    end
+    return all_bill_parts
+  end
+
+  def bill_total
+    self.bills.map{|bill| bill.amount}.reduce(:+)    
   end
 
 end
