@@ -5,7 +5,7 @@
 
   <% current_user.households.each do |household| %>
     <li class=<%= request.path.start_with?("/households/") && @current_household_id == household.id ? "active" : "" %>>
-    <%= link_to household.name, household_members_path(household.id) %>
+      <%= link_to household.name, household_members_path(household.id) %>
     </li>
   <% end %>
 
@@ -18,9 +18,9 @@
       <%= link_to "Members", household_members_path(@current_household_id) %>
     </li>
 
-    <li class=<%= request.path.end_with?("/households") ? "active" : "" %>>
-      <%= link_to "Bills", "#" %>
-    </li> 
+    <li class=<%= request.path.end_with?("/bills") || request.path.split("/").include?("bills") ? "active" : "" %>>
+      <%= link_to "Bills", household_bills_path(@current_household_id) %>
+    </li>
 
   </ul>
 <% end %>

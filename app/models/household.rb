@@ -1,7 +1,8 @@
 class Household < ActiveRecord::Base
   attr_accessible :name
 
-  has_many :household_members #, :bills
+  has_many :household_members
+  has_many :bills
   has_many :users, :through => :household_members
 
   def active_members
@@ -12,6 +13,10 @@ class Household < ActiveRecord::Base
 
   def inactive_members
     self.household_members.where(:active => false)
+  end
+
+  def managers
+    self.household_members.where(:manager => true)
   end
 
 end

@@ -1,0 +1,77 @@
+<h2>Add a new bill you've paid in <%= @current_household.name %></h2>
+
+<% if @bill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bill.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @bill.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= form_for @bill, :url => { :action => "create" } do |f| %>
+
+  <fieldset>
+
+    <legend>Amount + Description</legend>
+    <div class="input-prepend">
+      <%= f.label :amount %>
+      <span class="add-on">$</span>
+      <%= f.text_field :amount %>
+    </div>
+
+    <% if current_user.is_manager_of?(@current_household) %>
+      <div style="margin-bottom: 20px;">
+        <%= f.label :private do %>
+          <%= f.check_box :private %>
+          &nbsp;<span class="label label-important">Private</span><br>
+          Check to make amount private so only house managers (<%= @current_household.managers.map{|m| m.user.first_name}.join(", ") %>) can see the amount<br>
+          <i>(use with discretion, only house managers can do this)</i>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <div>
+      <%= f.label :provider, "Provider (e.g. Comcast, PG&E, Rent, etc.)" %>
+      <%= f.text_field :provider %>
+    </div>
+
+    <div>
+      <%= f.label :description, "Description/details" %>
+      <%= f.text_field :description %>
+    </div>
+
+  </fieldset>
+  <fieldset>
+    <legend>Billing Period</legend>
+
+    <div>
+      <%= f.label :period_started_on, "Bill Start Date (start of billing period for this bill)" %>
+      <%= f.text_field :period_started_on, :type => "date" %>
+    </div>
+
+    <div>
+      <%= f.label :period_ended_on, "Bill End Date (end of billing period for this bill)" %>
+      <%= f.text_field :period_ended_on, :type => "date" %>
+    </div>
+
+    <legend>Bill Date<!-- + Date Paid --></legend>
+    
+    <div>
+      <%= f.label :billed_on, "Bill Date (date this bill was issued)" %>
+      <%= f.text_field :billed_on, :type => "date" %>
+    </div>
+
+     <div>
+      <% # f.label :paid_on, "Date Paid (date on which you paid this bill)" %>
+      <% # f.text_field :paid_on, :type => "date" %>
+    </div>
+
+  </fieldset>
+
+      <div><%= f.submit "Add bill", :class => "btn btn-primary" %></div>
+
+<% end %>

@@ -1,5 +1,5 @@
 class HouseholdsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :get_current_household, :except => [:index, :new, :create] #, :authorize_user_for_household #TODO!!! :only => [:edit, :destroy, :show, :update, :show_members, :new_member, :create_members, :update_members, :destroy_household_member]
 
   # GET /households
   def index
@@ -93,6 +93,9 @@ class HouseholdsController < ApplicationController
   end
 
   # PUT /households/:household_id/members/:household_member_id/:update_action
+  # I would probably just do this:
+  # PUT /household_members/:id # {:active => true}
+  # <3 EMO
   def update_members
     @household = Household.find(params[:household_id])
     @household_member = HouseholdMember.find(params[:household_member_id])
@@ -118,5 +121,41 @@ class HouseholdsController < ApplicationController
 
     redirect_to household_members_url(params[:household_id])
   end
+
+  private
+
+  def get_current_household
+    # Is there a better way!?!?
+    @current_household_id = (params[:household_id] || params[:id]).to_i
+    @current_household = Household.find(@current_household_id)
+  end
+
+  # end
+  # TODO!!!
+  # Make sure that the current user is in the household!
+  # def authorize_user_for_household
+  #   # only check on individual households
+  #   current_household_id = params[:id] || params[:household_id]
+
+  #   if current_household_id.nil?
+  #     return
+  #   else
+  #     current_household = Household.find(current_household_id)
+  #     if current_household.nil?
+  #       return
+  #     else
+  #       authorized = false
+  #       current_household_members = current_household.household_members
+  #       current_user.household_members.each do |user_member|
+  #         if current_household_members.include?(user_member)
+  #           authorized = true
+  #         else
+  #           redirect_to households_url, :alert => "You are not allowed to see that!"
+  #         end
+  #       end
+  #     end
+  #   end
+
+  # end
 
 end

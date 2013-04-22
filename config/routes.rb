@@ -15,7 +15,10 @@ Rentsplit::Application.routes.draw do
   # put "/households/:id", :to => "households#update", :as => "households_update"
   # delete "/households/:id", :to => "households#destroy"
 
-  resources :households
+  resources :households do
+    resources :bills
+  end
+  
   get "/households", :to => "households#index", :as => "user_root"
 
   # HOUSEHOLDS AND THEIR MEMBERS

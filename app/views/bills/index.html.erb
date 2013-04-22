@@ -1,0 +1,51 @@
+<% unless @bills.empty? %>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Provider</th>
+      <th>Amount</th>
+      <th>Who Paid</th>
+      <th>Billing Period</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @bills.each do |bill| %>
+    
+    <tr>
+      <td><%= link_to bill.provider, household_bill_path(@current_household_id, bill.id) %></td>
+      <td>
+        <% if bill.private %>
+          <% if current_user.is_manager_of?(@current_household) %>
+            <%= integer_to_currency(bill.amount) %>
+            &nbsp;
+            <span class="label label-important">Private</span>
+          <% else %>
+            <span class="label">Hidden</span>
+          <% end %>
+        <% else %>
+          <%= integer_to_currency(bill.amount) %>
+        <% end %>
+      </td>
+      <td><%= bill.paid_by_user?(current_user) ? "You" : "#{bill.paid_by.user.name}" %></td>
+      <td>
+        <!-- Bill Date: <%= ordinalize_date(bill.billed_on) %> -->
+        <%= ordinalize_date(bill.period_started_on) %> to <%= ordinalize_date(bill.period_ended_on) %>
+      </td>
+      <td>
+        <% if bill.paid_by_user?(current_user) %>
+          <%= link_to 'Delete', household_bill_path(@current_household_id, bill.id), :class => "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Are you sure? There is NO going back! We trust you want to delete this, because you originally paid it.' } %>
+        <% end %>
+      </td>
+    </tr>
+
+    <% end %>
+
+  </tbody>
+</table>
+
+<% end %>
+
+<%= link_to "Add bill you've paid", new_household_bill_path, :class => "btn btn-primary top-space" %>

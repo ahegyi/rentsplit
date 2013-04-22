@@ -1,0 +1,62 @@
+<ul class="app-navigation nav nav-pills">
+  <li class="active">
+    <%= link_to household_bill_path(@current_household_id, @bill) do %>
+      <%= @bill.provider %> Bill from <%= ordinalize_date(@bill.period_started_on) %> to <%= ordinalize_date(@bill.period_ended_on) %>
+    <% end %>
+  </li>
+</ul>
+
+<table class="table">
+  <tbody>
+
+    <tr>
+      <th>Provider</th>
+      <td>
+        <strong><%= @bill.provider %></strong>
+        <% unless @bill.description.empty? %>
+          <p>
+            <%= @bill.description %>
+          </p>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Amount</th>
+      <td>
+        <% if @bill.private %>
+          <% if current_user.is_manager_of?(@current_household) %>
+            <strong><%= integer_to_currency(@bill.amount) %></strong>
+            &nbsp;
+            <span class="label label-important">Private</span>
+          <% else %>
+            <span class="label">Hidden</span>
+          <% end %>
+        <% else %>
+          <strong><%= integer_to_currency(@bill.amount) %></strong>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Paid By</th>
+      <td><%= @bill.paid_by_user?(current_user) ? "You" : "#{@bill.paid_by.user.name}" %></td>
+    </tr>
+
+    <tr>
+      <th>Billing Period</th>
+      <td><%= ordinalize_date(@bill.period_started_on) %> to <%= ordinalize_date(@bill.period_ended_on) %></td>
+    </tr>
+
+    <% unless @bill.billed_on.nil? %>
+    <tr>
+      <th>Bill Date</th>
+      <td>
+        <%= ordinalize_date(@bill.billed_on) %>
+      </td>
+    </tr>
+    <% end %>
+
+
+  </tbody>
+</table>
