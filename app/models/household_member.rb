@@ -16,4 +16,5 @@ class HouseholdMember < ActiveRecord::Base
 
   #  alias_method :active?, :active # This shit is weird, will alias to the active class variable
 
+  
 end

@@ -6,11 +6,16 @@
   </li>
 </ul>
 
-<table class="table">
+<table class="table bill-details">
+  <thead>
+    <tr>
+      <th colspan="2">Bill Details</th>
+    </tr>
+  </thead>
   <tbody>
 
     <tr>
-      <th>Provider</th>
+      <th class="header-label">Provider</th>
       <td>
         <strong><%= @bill.provider %></strong>
         <% unless @bill.description.empty? %>
@@ -22,7 +27,7 @@
     </tr>
 
     <tr>
-      <th>Amount</th>
+      <th class="header-label">Amount</th>
       <td>
         <% if @bill.private %>
           <% if current_user.is_manager_of?(@current_household) %>
@@ -39,18 +44,18 @@
     </tr>
 
     <tr>
-      <th>Paid By</th>
+      <th class="header-label">Paid By</th>
       <td><%= @bill.paid_by_user?(current_user) ? "You" : "#{@bill.paid_by.user.name}" %></td>
     </tr>
 
     <tr>
-      <th>Billing Period</th>
+      <th class="header-label">Billing Period</th>
       <td><%= ordinalize_date(@bill.period_started_on) %> to <%= ordinalize_date(@bill.period_ended_on) %></td>
     </tr>
 
     <% unless @bill.billed_on.nil? %>
     <tr>
-      <th>Bill Date</th>
+      <th class="header-label">Bill Date</th>
       <td>
         <%= ordinalize_date(@bill.billed_on) %>
       </td>
@@ -60,3 +65,25 @@
 
   </tbody>
 </table>
+
+<% unless @bill.bill_parts.empty? # Backwards compatibility, yo %>
+
+  <table class="table bill-details">
+    <thead>
+      <tr>
+        <th colspan="2">Who Owes What for This Bill</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @bill.bill_parts.each do |bill_part| %>
+        <tr>
+          <th class="header-label"><%= bill_part.owed_by.user.first_name %></th>
+          <td><%= integer_to_currency(bill_part.amount) %></td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+
+<% end %>

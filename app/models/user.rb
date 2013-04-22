@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
-  has_many :household_members #, :bill_parts
+  has_many :household_members
   has_many :households, :through => :household_members
 
 

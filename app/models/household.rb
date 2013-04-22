@@ -19,4 +19,9 @@ class Household < ActiveRecord::Base
     self.household_members.where(:manager => true)
   end
 
+  def calculate_payments
+    # add up 
+    
+  end
+
 end
