@@ -1,9 +1,9 @@
 Rentsplit::Application.routes.draw do
   root :to => 'pages#home'
+  get "/privacy", :to => "pages#privacy", :as => "pages_privacy"
+  get "/terms", :to => "pages#terms", :as => "pages_terms"
 
   devise_for :users
-
-  
 
   # HOUSEHOLDS
   # get "/households", :to => "households#home", :as => "user_root"
@@ -18,7 +18,7 @@ Rentsplit::Application.routes.draw do
   resources :households do
     resources :bills
   end
-  
+
   get "/households", :to => "households#index", :as => "user_root"
 
   # HOUSEHOLDS AND THEIR MEMBERS
