@@ -37,7 +37,9 @@
       <div class="row-fluid">
         <span class="span12">
           
-          <%= render "common/app_navigation" %>
+          <% if user_signed_in? %>
+            <%= render "common/app_navigation" %>
+          <% end %>
           
           <%= yield %>
 
