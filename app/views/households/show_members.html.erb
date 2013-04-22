@@ -5,7 +5,9 @@
   <li>
     <%= member.user.name %>
     &nbsp;(<%= link_to member.user.email, "mailto:#{member.user.email}", :target => "_blank" %>)
-    &nbsp;|&nbsp;&nbsp;
+    &nbsp;
+    <span class="label"><%= member.manager ? "Manager" : "" %></span>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
     Since <%= ordinalize_date(member.last_entered_on) %>
     <% if current_user.is_manager_of?(@household) %>
       &nbsp;&nbsp;|&nbsp;&nbsp;
