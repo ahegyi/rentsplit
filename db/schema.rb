@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421041755) do
+ActiveRecord::Schema.define(:version => 20130422014754) do
+
+  create_table "bill_parts", :force => true do |t|
+    t.integer  "amount"
+    t.integer  "bill_id"
+    t.integer  "owed_by_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "bills", :force => true do |t|
     t.integer  "amount"
@@ -43,6 +51,15 @@ ActiveRecord::Schema.define(:version => 20130421041755) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "payments", :force => true do |t|
+    t.integer  "amount",       :default => 0, :null => false
+    t.date     "paid_on"
+    t.integer  "paid_to_id"
+    t.integer  "paid_from_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "users", :force => true do |t|
