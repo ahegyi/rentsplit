@@ -4,7 +4,5 @@ Rentsplit is a web application to keep track of expenses within a household, so 
 can get paid back appropriately.
 
 See
-link:127.0.0.1
+link:http://www.rentsplit.co
 to check it out.
-
-       Test box.
