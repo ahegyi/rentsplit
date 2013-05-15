@@ -16,3 +16,6 @@
 
 # Ignore private/secret environment variables
 .env
+
+# Ignore simplecov blabber
+/coverage
